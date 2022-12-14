@@ -48,7 +48,6 @@ int main(void) {
   remove(scm_file);
   remove(ORDERED_FILE_NAME);
 
-
   if ((dir = opendir(PATH_IMAGES_ORIGINAL))) {
     printf("\n=-=-=- PROCESSANDO IMAGENS -=-=-=\n");
     printf("Aguarde...\n");
@@ -61,7 +60,7 @@ int main(void) {
 
       readPGMImage(&img_original, dir_img->d_name);
       quantizeMatrix(img_original.pData, img_original.r, img_original.c, levels);
-      //writePGMImage(&img_original,dir_img->d_name);
+      writePGMImage(&img_original, dir_img->d_name);
       
       strcpy(img_name, dir_img->d_name);
       img_name[17] = '\0';
@@ -70,17 +69,18 @@ int main(void) {
 
       readPGMImage(&img_mean, img_name);
       quantizeMatrix(img_mean.pData, img_mean.r, img_mean.c, levels);
-      //writePGMImage(&img_mean,img_name);
+      writePGMImage(&img_mean, img_name);
+      
       if (!(scm = calloc(levels * levels, sizeof(unsigned int)))) {
         printf("ERRO: Memória insuficiente para alocação.\n");
         exit(1);
       }
 
-      label = dir_img->d_name[0];
       calculateSCM(img_original.pData, img_mean.pData, scm, levels,img_mean.r * img_mean.c);
       free(img_original.pData);
       free(img_mean.pData);
 
+      label = dir_img->d_name[0];
       writeSCM(scm, scm_file, levels * levels, label);
 
       free(scm);
