@@ -20,7 +20,6 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 #include <stdio.h>
 
 #define PATH_IMAGES_ORIGINAL "./images"
-#define PATH_IMAGES_MEAN "./images-mean"
 #define PATH_NEW_IMAGES "quantize-images/"
 #define PATH_IMAGES "images/"
 #define SIZE_LVL 4
@@ -30,7 +29,7 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 #define LEVEL_MX 256
 #define ORDERED_FILE_NAME "ordered_files.txt"
 
-
 void showMenu();
 void getLevel(int*);
+
 #endif
