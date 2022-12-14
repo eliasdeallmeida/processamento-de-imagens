@@ -61,7 +61,7 @@ int main(void) {
 
       readPGMImage(&img_original, dir_img->d_name);
       quantizeMatrix(img_original.pData, img_original.r, img_original.c, levels);
-      writePGMImage(&img_original,dir_img->d_name);
+      //writePGMImage(&img_original,dir_img->d_name);
       
       strcpy(img_name, dir_img->d_name);
       img_name[17] = '\0';
@@ -70,7 +70,7 @@ int main(void) {
 
       readPGMImage(&img_mean, img_name);
       quantizeMatrix(img_mean.pData, img_mean.r, img_mean.c, levels);
-      writePGMImage(&img_mean,img_name);
+      //writePGMImage(&img_mean,img_name);
       if (!(scm = calloc(levels * levels, sizeof(unsigned int)))) {
         printf("ERRO: Memória insuficiente para alocação.\n");
         exit(1);
