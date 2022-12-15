@@ -20,10 +20,10 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 #include <dirent.h>
 #include <time.h>
 
-int main(void) {
+int main(void){
   unsigned int *scm;
   int levels;
-  char levels_str[SIZE_LVL];
+  char levels_str[SIZE_LEVEL];
   char img_name[SIZE_FILE_NAME];
 
   int qt_img = 0;
@@ -46,37 +46,38 @@ int main(void) {
   strcat(scm_file, SCM_FILE_EXTENSION);
 
   remove(scm_file);
-  remove(ORDERED_FILE_NAME);
+  remove(IMAGES_READ_FILE_NAME);
 
-  if ((dir = opendir(PATH_IMAGES_ORIGINAL))) {
+  if((dir = opendir(PATH_IMAGES))){
     printf("\n=-=-=- PROCESSANDO IMAGENS -=-=-=\n");
     printf("Aguarde...\n");
 
-    while ((dir_img = readdir(dir)) != NULL) {
-      if (dir_img->d_name[0] == '.' || strstr(dir_img->d_name, "mean")) {
+    while((dir_img = readdir(dir)) != NULL){
+      if(dir_img->d_name[0] == '.' || strstr(dir_img->d_name, "mean")){
         continue;
       }
+
       begin = clock();
 
       readPGMImage(&img_original, dir_img->d_name);
-      quantizeMatrix(img_original.pData, img_original.r, img_original.c, levels);
+      quantizeMatrix(img_original.pData, img_original.rows, img_original.columns, levels);
       writePGMImage(&img_original, dir_img->d_name);
       
       strcpy(img_name, dir_img->d_name);
       img_name[17] = '\0';
-      writeOrderedFile(img_name, ORDERED_FILE_NAME);
+      writeOrderedFile(img_name, IMAGES_READ_FILE_NAME);
       strcat(img_name, "_mean.pgm");
 
       readPGMImage(&img_mean, img_name);
-      quantizeMatrix(img_mean.pData, img_mean.r, img_mean.c, levels);
+      quantizeMatrix(img_mean.pData, img_mean.rows, img_mean.columns, levels);
       writePGMImage(&img_mean, img_name);
       
-      if (!(scm = calloc(levels * levels, sizeof(unsigned int)))) {
+      if(!(scm = calloc(levels * levels, sizeof(unsigned int)))){
         printf("ERRO: Memória insuficiente para alocação.\n");
         exit(1);
       }
 
-      calculateSCM(img_original.pData, img_mean.pData, scm, levels,img_mean.r * img_mean.c);
+      calculateSCM(img_original.pData, img_mean.pData, scm, levels,img_mean.rows * img_mean.columns);
       free(img_original.pData);
       free(img_mean.pData);
 

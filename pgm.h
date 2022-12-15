@@ -23,14 +23,14 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 
 struct pgm{
   int type;
-  int c;
-  int r;
-  int mv;
+  int columns;
+  int rows;
+  int max_value;
   unsigned char *pData;
 };
 
-void readPGMImage(struct pgm*, char*);
-void writePGMImage(struct pgm*, char*);
-void viewPGMImage(struct pgm*);
+void readPGMImage(struct pgm *, char *);
+void writePGMImage(struct pgm *, char *);
+void viewPGMImage(struct pgm *);
 
 #endif

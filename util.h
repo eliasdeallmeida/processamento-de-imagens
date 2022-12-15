@@ -19,17 +19,17 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 
 #include <stdio.h>
 
-#define PATH_IMAGES_ORIGINAL "./images"
-#define PATH_NEW_IMAGES "quantize-images/"
-#define PATH_IMAGES "images/"
-#define SIZE_LVL 4
+#define PATH_IMAGES "./images"
+#define PATH_ADD_IMAGES "images/"
+#define PATH_ADD_QUANTIZED_IMAGES "quantized-images/"
+#define IMAGES_READ_FILE_NAME "images-read.txt"
 #define SIZE_PATH_NAME 50
 #define SIZE_FILE_NAME 30
-#define LEVEL_MIN 8
-#define LEVEL_MX 256
-#define ORDERED_FILE_NAME "ordered_files.txt"
+#define SIZE_LEVEL 4
+#define MIN_LEVEL 8
+#define MAX_LEVEL 256
 
 void showMenu();
-void getLevel(int*);
+void getLevel(int *);
 
 #endif

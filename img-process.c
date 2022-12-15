@@ -18,7 +18,7 @@ COMPILADOR: Replit - gcc version 10.3.0 (GCC)
 #include "util.h"
 
 void quantizeMatrix(unsigned char *pData, int rows, int columns, int levels) {
-  int max_level = LEVEL_MX / levels;
+  int max_level = MAX_LEVEL / levels;
   for (unsigned char *i = pData; i < (pData + rows * columns); i++) {
     *i /= max_level;
   }
@@ -54,6 +54,7 @@ void writeOrderedFile(char *img_name, char *file_name) {
     printf("ERRO.\n");
     exit(1);
   }
+  
   fprintf(fp, "%s\n", img_name);
   fclose(fp);
 }
